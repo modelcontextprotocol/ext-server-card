@@ -200,6 +200,23 @@ export interface Remote {
    * clients to select a compatible protocol version before connecting.
    */
   supportedProtocolVersions?: string[];
+
+  /**
+   * Optional server-level information about MCP extensions for this remote
+   * endpoint. Keys are extension identifiers (e.g.,
+   * `"io.modelcontextprotocol/events"`), and values are objects whose contents
+   * are defined by the respective extension — typically information a client
+   * needs before connecting, such as keys for verifying webhook signatures.
+   *
+   * The presence or absence of an entry does not indicate whether the server
+   * supports that extension, and an entry need not match the server's
+   * `capabilities.extensions`. Extension support is negotiated at runtime via
+   * `server/discover` and may vary per user.
+   *
+   * Keys MUST follow the {@link MetaObject | `_meta` key naming rules}, with a
+   * mandatory prefix.
+   */
+  extensions?: { [key: string]: JSONObject };
 }
 
 /**
@@ -278,6 +295,27 @@ export interface KeyValueInput extends Input {
 }
 
 /* ---------- Inlined dependencies from the main MCP spec ---------- */
+
+/**
+ * @category Common Types
+ */
+export type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JSONObject
+  | JSONArray;
+
+/**
+ * @category Common Types
+ */
+export type JSONObject = { [key: string]: JSONValue };
+
+/**
+ * @category Common Types
+ */
+export type JSONArray = JSONValue[];
 
 /**
  * Represents the contents of a `_meta` field, which clients and servers use to attach additional metadata to their interactions.

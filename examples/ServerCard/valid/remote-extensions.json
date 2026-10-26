@@ -1,0 +1,30 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+  "name": "example-org/with-extensions",
+  "version": "1.0.0",
+  "description": "Server Card whose remote publishes extension information.",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.example.com/mcp",
+      "supportedProtocolVersions": ["2025-11-25"],
+      "extensions": {
+        "io.modelcontextprotocol/events": {
+          "webhooks": {
+            "signingKeys": {
+              "keys": [
+                {
+                  "kty": "OKP",
+                  "crv": "Ed25519",
+                  "kid": "2026-10",
+                  "x": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+                }
+              ]
+            },
+            "egressIpRanges": ["203.0.113.0/24", "2001:db8::/32"]
+          }
+        }
+      }
+    }
+  ]
+}

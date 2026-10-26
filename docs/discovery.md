@@ -153,6 +153,12 @@ the transport served at each `remotes[]` endpoint, and descriptive fields (`titl
 `description`, `icons`) — SHOULD NOT contradict the equivalent values declared in the Server
 Card.
 
+A remote's `extensions` map carries server-level information defined by each extension; it
+is not a declaration of extension support. Clients MUST NOT infer from the presence or
+absence of an entry whether the server supports that extension — support is negotiated via
+`capabilities.extensions` in `server/discover`, which may vary per user and need not match
+the Server Card.
+
 As with the deliberately omitted primitives (tools, resources, prompts), a static manifest
 can drift from runtime, so even the fields a Server Card does declare are advisory rather
 than binding. Accordingly:

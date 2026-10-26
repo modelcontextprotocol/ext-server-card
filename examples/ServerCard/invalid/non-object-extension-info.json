@@ -1,0 +1,15 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+  "name": "example-org/bad-extension",
+  "version": "1.0.0",
+  "description": "Extension information must be an object, not a boolean.",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.example.com/mcp",
+      "extensions": {
+        "io.modelcontextprotocol/tasks": true
+      }
+    }
+  ]
+}

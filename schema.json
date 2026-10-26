@@ -71,6 +71,34 @@
       },
       "type": "object"
     },
+    "JSONArray": {
+      "items": {
+        "$ref": "#/$defs/JSONValue"
+      },
+      "type": "array"
+    },
+    "JSONObject": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JSONValue"
+      },
+      "type": "object"
+    },
+    "JSONValue": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/JSONObject"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/JSONValue"
+          },
+          "type": "array"
+        },
+        {
+          "type": ["string", "integer", "boolean"]
+        }
+      ]
+    },
     "KeyValueInput": {
       "description": "A named {@link Input} — used for HTTP headers — whose `value` may reference\nvariables for substitution.",
       "properties": {
@@ -133,6 +161,13 @@
     "Remote": {
       "description": "Metadata for connecting to a remote (HTTP-based) MCP server endpoint.",
       "properties": {
+        "extensions": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JSONObject"
+          },
+          "description": "Optional server-level information about MCP extensions for this remote\nendpoint. Keys are extension identifiers (e.g.,\n`\"io.modelcontextprotocol/events\"`), and values are objects whose contents\nare defined by the respective extension — typically information a client\nneeds before connecting, such as keys for verifying webhook signatures.\n\nThe presence or absence of an entry does not indicate whether the server\nsupports that extension, and an entry need not match the server's\n`capabilities.extensions`. Extension support is negotiated at runtime via\n`server/discover` and may vary per user.\n\nKeys MUST follow the {@link MetaObject`_meta` key naming rules}, with a\nmandatory prefix.",
+          "type": "object"
+        },
         "headers": {
           "description": "HTTP headers required or accepted when connecting to this remote\nendpoint. Each header is described as a {@link KeyValueInput} so that\nclients can prompt users for required values, mark secrets, surface\ndefaults, and constrain to a list of choices.",
           "items": {

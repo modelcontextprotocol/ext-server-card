@@ -1,14 +1,14 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
-  "name": "example-org/with-extensions",
+  "name": "example-org/with-extensions-info",
   "version": "1.0.0",
   "description": "Server Card whose remote publishes extension information.",
   "remotes": [
     {
       "type": "streamable-http",
       "url": "https://mcp.example.com/mcp",
-      "supportedProtocolVersions": ["2025-11-25"],
-      "extensions": {
+      "supportedProtocolVersions": ["2026-07-28"],
+      "extensionsInfo": {
         "io.modelcontextprotocol/events": {
           "webhooks": {
             "signingKeys": {

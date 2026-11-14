@@ -161,7 +161,7 @@
     "Remote": {
       "description": "Metadata for connecting to a remote (HTTP-based) MCP server endpoint.",
       "properties": {
-        "extensions": {
+        "extensionsInfo": {
           "additionalProperties": {
             "$ref": "#/$defs/JSONObject"
           },

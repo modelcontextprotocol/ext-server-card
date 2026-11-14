@@ -216,7 +216,7 @@ export interface Remote {
    * Keys MUST follow the {@link MetaObject | `_meta` key naming rules}, with a
    * mandatory prefix.
    */
-  extensions?: { [key: string]: JSONObject };
+  extensionsInfo?: { [key: string]: JSONObject };
 }
 
 /**

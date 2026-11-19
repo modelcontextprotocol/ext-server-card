@@ -13,7 +13,7 @@ A prior attempt to land these types directly in the core spec ([modelcontextprot
 A **Server Card** is a JSON document — hosted at any unreserved URI, with `GET <streamable-http-url>/server-card` reserved as the recommended location (see [discovery.md](docs/discovery.md)) — describing:
 
 - The server's identity (`name`, `version`, `description`, optional `title` / `icons` / `repository` / `websiteUrl`)
-- Its remote transport endpoints (URLs, headers, variable templates, supported protocol versions)
+- Its remote transport endpoints (URLs, headers, variable templates, supported protocol versions, server-level extension information)
 - Optional registry-style extension metadata (`_meta`)
 
 Clients can automatically discover Server Cards through [AI Catalog](https://github.com/Agent-Card/ai-catalog) entries advertised on domains present in agentic sessions.

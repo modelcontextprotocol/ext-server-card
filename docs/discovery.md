@@ -153,14 +153,30 @@ the transport served at each `remotes[]` endpoint, and descriptive fields (`titl
 `description`, `icons`) — SHOULD NOT contradict the equivalent values declared in the Server
 Card.
 
+A remote's `extensionsInfo` map carries server-level information defined by each extension;
+it is not a declaration of extension support. Clients MUST NOT infer from the presence or
+absence of an entry whether the server supports that extension — support is negotiated via
+`capabilities.extensions` in `server/discover`, which may vary per user and need not match
+the Server Card.
+
+Extension information that a client relies on for a security decision (for example,
+verification keys or source IP ranges) MUST only be used when the Server Card was retrieved
+over HTTPS from the same origin as that remote's `url` (after variable substitution),
+without following a redirect to another origin. Clients MUST NOT rely on such information
+from a Server Card hosted on another origin or embedded inline in a catalog entry. Where
+several servers share an origin, this rule trusts whoever controls that origin.
+
 As with the deliberately omitted primitives (tools, resources, prompts), a static manifest
-can drift from runtime, so even the fields a Server Card does declare are advisory rather
-than binding. Accordingly:
+can drift from runtime, so the runtime-related fields a Server Card does declare are
+advisory rather than binding. Accordingly:
 
 - Clients MUST NOT treat Server Card contents as authoritative for security or
-  access-control decisions.
+  access-control decisions for which the live connection is the source of truth.
 - Clients SHOULD verify a Server Card's claims against the live connection, preferring the
   runtime values where the two disagree.
+
+These caveats do not apply to information that has no runtime equivalent, such as the
+extension information described above, which is governed by the same-origin rule instead.
 
 ### Hosted Server Card Location
 
